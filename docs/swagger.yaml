@@ -1,0 +1,51 @@
+definitions:
+  ViewStruct.UploadRequest:
+    properties:
+      filePath:
+        description: 文件路径
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /upload:
+    post:
+      consumes:
+      - application/json
+      description: 上传文件并解析元数据
+      parameters:
+      - description: 上传请求信息
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/ViewStruct.UploadRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功返回metadataId
+          schema:
+            additionalProperties: true
+            type: object
+      tags:
+      - files
+  /xml:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Name to say hello
+        in: query
+        name: filepath
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+swagger: "2.0"
